@@ -3000,6 +3000,11 @@ MonoBehaviour:
   groundCheck1: {fileID: 1779272496}
   groundCheck2: {fileID: 1690690021}
   groundCheck3: {fileID: 2057087003}
+  groundCheckArray:
+  - {x: 0, y: -0.3754, z: 0}
+  - {x: -0.3754, y: 0, z: 0}
+  - {x: 0.3754, y: 0, z: 0}
+  - {x: 0, y: 0.3754, z: 0}
   groundDistance: 0.1
   isGrounded: 0
 --- !u!1 &2055769605

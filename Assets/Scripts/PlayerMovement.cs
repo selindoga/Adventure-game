@@ -19,11 +19,9 @@ public class PlayerMovement : MonoBehaviour
     private float jVertical;
     private float Sensitivity = 0.35f;
     private float movingSpeed = 150f;
-    
-    [SerializeField]
+    private Vector2 lowestGroundCheck;
+    private Vector3[] groundCheckArray = new Vector3[4];
     private float groundDistance = 0.1f;
-    
-    [SerializeField]
     private bool isGrounded;
 
     private void Awake()
@@ -61,9 +59,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update() // fixed update e almam gerekebilir
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundDistance, groundMask) || 
-                     Physics2D.OverlapCircle(groundCheck1.position, groundDistance, groundMask) ||
-                     Physics2D.OverlapCircle(groundCheck2.position, groundDistance, groundMask) ||
-                     Physics2D.OverlapCircle(groundCheck3.position, groundDistance, groundMask);
+        groundCheckArray [0] = groundCheck.position;
+        groundCheckArray [1] = groundCheck1.position;
+        groundCheckArray [2] = groundCheck2.position;
+        groundCheckArray [3] = groundCheck3.position;
+        
+        isGrounded = Physics2D.OverlapCircle( FindLowestGroundCheck(groundCheckArray), groundDistance, groundMask);
+    }
+
+    private Vector3 FindLowestGroundCheck(Vector3[] vectorArray)
+    {
+        Vector3 _vector = new Vector3();
+        foreach (var vector in vectorArray)
+        {
+            if (vector.y < _vector.y)
+                _vector = vector;
+        }
+        return _vector;
     }
 }
