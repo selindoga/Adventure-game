@@ -5,15 +5,26 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float Sensitivity = 0.35f;
-
+    
+    public LayerMask groundMask;
     public Joystick joystick;
+    public Transform groundCheck;
+    public Transform groundCheck1;
+    public Transform groundCheck2;
+    public Transform groundCheck3;
+
     private Rigidbody2D rb;
     private Vector2 HorizontalMove;
-
     private float jHorizontal;
     private float jVertical;
-
+    private float Sensitivity = 0.35f;
+    private float movingSpeed = 150f;
+    
+    [SerializeField]
+    private float groundDistance = 0.1f;
+    
+    [SerializeField]
+    private bool isGrounded;
 
     private void Awake()
     {
@@ -33,13 +44,26 @@ public class PlayerMovement : MonoBehaviour
         // Rigidbody2D.velocity is good with dynamic
         // Rigidbody2D.MovePosition is good with kinematic
         
-        if (jHorizontal >= Sensitivity)
+
+        if (isGrounded)
         {
-            rb.velocity = HorizontalMove;
-        } 
-        else if (jHorizontal <= -Sensitivity)
-        {
-            rb.velocity = -HorizontalMove;
+            if (jHorizontal >= Sensitivity)
+            {
+                rb.velocity = HorizontalMove * Time.fixedDeltaTime * movingSpeed;
+            } 
+            else if (jHorizontal <= -Sensitivity)
+            {
+                rb.velocity = -HorizontalMove * Time.fixedDeltaTime * movingSpeed;
+            }
         }
+        
+    }
+
+    private void Update() // fixed update e almam gerekebilir
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundDistance, groundMask) || 
+                     Physics2D.OverlapCircle(groundCheck1.position, groundDistance, groundMask) ||
+                     Physics2D.OverlapCircle(groundCheck2.position, groundDistance, groundMask) ||
+                     Physics2D.OverlapCircle(groundCheck3.position, groundDistance, groundMask);
     }
 }
