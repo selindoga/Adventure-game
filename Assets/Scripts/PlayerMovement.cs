@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     
     public LayerMask groundMask;
     public Joystick joystick;
+    
     public Transform groundCheck;
     public Transform groundCheck1;
     public Transform groundCheck2;
@@ -22,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 lowestGroundCheck;
     private Vector3[] groundCheckArray = new Vector3[4];
     private float groundDistance = 0.1f;
+    
+    [SerializeField]
     private bool isGrounded;
 
     private void Awake()
@@ -42,6 +45,13 @@ public class PlayerMovement : MonoBehaviour
         // Rigidbody2D.velocity is good with dynamic
         // Rigidbody2D.MovePosition is good with kinematic
         
+        groundCheckArray [0] = groundCheck.position;
+        groundCheckArray [1] = groundCheck1.position;
+        groundCheckArray [2] = groundCheck2.position;
+        groundCheckArray [3] = groundCheck3.position;
+        
+        isGrounded = Physics2D.OverlapCircle( FindLowestGroundCheck(groundCheckArray), groundDistance, groundMask);
+        
 
         if (isGrounded)
         {
@@ -57,19 +67,9 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    private void Update() // fixed update e almam gerekebilir
-    {
-        groundCheckArray [0] = groundCheck.position;
-        groundCheckArray [1] = groundCheck1.position;
-        groundCheckArray [2] = groundCheck2.position;
-        groundCheckArray [3] = groundCheck3.position;
-        
-        isGrounded = Physics2D.OverlapCircle( FindLowestGroundCheck(groundCheckArray), groundDistance, groundMask);
-    }
-
     private Vector3 FindLowestGroundCheck(Vector3[] vectorArray)
     {
-        Vector3 _vector = new Vector3();
+        Vector3 _vector = new Vector3(0,1000,0);
         foreach (var vector in vectorArray)
         {
             if (vector.y < _vector.y)
