@@ -82,9 +82,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (isGrounded)
-        {
-            rb.velocity = VerticalMove * jumpingSpeed;
+        if (isGrounded){
+            for (int i = 0; i < Input.touchCount; ++i)
+            {
+                rb.velocity = VerticalMove * jumpingSpeed;
+            }
         }
     }
 }

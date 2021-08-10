@@ -3525,6 +3525,7 @@ MonoBehaviour:
   groundCheck2: {fileID: 1690690021}
   groundCheck3: {fileID: 2057087003}
   isGrounded: 0
+  touch: 0
 --- !u!1 &2055769605
 GameObject:
   m_ObjectHideFlags: 0
