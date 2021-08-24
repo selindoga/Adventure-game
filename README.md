@@ -1,3 +1,4 @@
-# A-Mysterious-Adventure
+# Somewhere-in-chaos
 
-a mobil platform game
+chaotic discovery, a different adventure game
+-mobile game
