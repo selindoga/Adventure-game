@@ -2615,7 +2615,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1867439529}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: Jump
+        m_MethodName: JumpButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3524,8 +3524,8 @@ MonoBehaviour:
   groundCheck1: {fileID: 1779272496}
   groundCheck2: {fileID: 1690690021}
   groundCheck3: {fileID: 2057087003}
-  isGrounded: 0
   touch: 0
+  isGrounded: 0
 --- !u!1 &2055769605
 GameObject:
   m_ObjectHideFlags: 0

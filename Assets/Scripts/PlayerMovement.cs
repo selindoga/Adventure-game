@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck1;
     public Transform groundCheck2;
     public Transform groundCheck3;
+    public TouchPhase touch; // bunu kullan lan
 
     private Rigidbody2D rb;
     private Vector2 HorizontalMove;
@@ -21,14 +23,15 @@ public class PlayerMovement : MonoBehaviour
     //private float jVertical;
     private float Sensitivity = 0.35f;
     private float movingSpeed = 70f;
-    private float jumpingSpeed = 10f;
+    private float jumpingSpeed = 50f;
     private float groundDistance = 0.1f;
     private Vector3[] groundCheckArray = new Vector3[4];
-    
+
     [SerializeField]
     private bool isGrounded;
+    [SerializeField]
+    private bool JumpCoroutineStarted;
 
-    public TouchPhase touch;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -79,14 +82,23 @@ public class PlayerMovement : MonoBehaviour
         }
         return _vector;
     }
+    
 
-    public void Jump()
+    IEnumerator Jump()
     {
-        if (isGrounded){
-            for (int i = 0; i < Input.touchCount; ++i)
-            {
-                rb.velocity = VerticalMove * jumpingSpeed;
-            }
+        JumpCoroutineStarted = true;
+        if (isGrounded)
+        {
+            rb.velocity = VerticalMove * jumpingSpeed;
         }
+        yield return new WaitForSeconds(0.3f);
+        JumpCoroutineStarted = false;
     }
+
+    public void JumpButton()
+    {
+        if (JumpCoroutineStarted!)
+            StartCoroutine(Jump());
+    }
+    
 }
