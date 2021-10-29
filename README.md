@@ -1,6 +1,6 @@
-# Not Completed
+# Not Finished
 
-# Adventure Game
+### Adventure Game
 a different discovery, adventure game
 -mobile game
 
