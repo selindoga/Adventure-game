@@ -2816,7 +2816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1867439527}
-  smoothness: 0.125
+  smoothness: 0.123
   offset: {x: 0, y: 0, z: -10}
 --- !u!20 &519420031
 Camera:
@@ -3526,6 +3526,7 @@ MonoBehaviour:
   groundCheck3: {fileID: 2057087003}
   touch: 0
   isGrounded: 0
+  JumpCoroutineStarted: 0
 --- !u!1 &2055769605
 GameObject:
   m_ObjectHideFlags: 0
